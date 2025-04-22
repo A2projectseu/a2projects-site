@@ -153,30 +153,34 @@ Ogni collaborazione nasce dall’ascolto e si costruisce su misura, con l’obie
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://formspree.io/f/xpwdzpnr" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
-                    <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Grazie per aver compilato il form.
-Riceverai una risposta entro 12 ore.</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops...! some problem!
-                        </div>
-                    </div>
-                    <div class="dragArea row">
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Nome" data-form-field="name" class="form-control" value="" id="name-form02-6">
-                        </div>
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-    				<input type="email" name="email" placeholder="Email" data-form-field="email" data-form-email class="form-control" value="" id="email-form02-6">
-			</div>
-                        <div class="col-12 form-group mb-3" data-for="phone">
-                            <input type="tel" name="phone" placeholder="Telefono" data-form-field="phone" class="form-control" value="" id="phone-form02-6">
-                        </div>
-                        <div class="col-12 form-group mb-3" data-for="textarea">
-                            <textarea name="message" placeholder="Messaggio" data-form-field="message" class="form-control" id="textarea-form02-6"></textarea>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-7">Invia modulo</button></div>
-                    </div>
-                </form>
+                <form action="https://formspree.io/f/xpwdzpnr" method="POST">
+    <div class="row">
+        <div class="col-md col-sm-12 form-group mb-3">
+            <input type="text" name="name" placeholder="Nome" class="form-control" required>
+        </div>
+        <div class="col-md col-sm-12 form-group mb-3">
+            <input type="email" name="email" placeholder="Email" class="form-control" required>
+        </div>
+        <div class="col-12 form-group mb-3">
+            <input type="tel" name="phone" placeholder="Telefono" class="form-control">
+        </div>
+        <div class="col-12 form-group mb-3">
+            <textarea name="message" placeholder="Messaggio" class="form-control" required></textarea>
+        </div>
+        <!-- Campo anti-bot invisibile -->
+        <input type="text" name="_gotcha" style="display:none">
+        
+        <!-- Risposta dopo invio -->
+        <div class="col-12" id="form-response" style="display:none;">
+            <div class="alert alert-success">Grazie per il tuo messaggio! Ti risponderò presto.</div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+            <button type="submit" class="btn btn-primary display-7">Invia modulo</button>
+        </div>
+    </div>
+</form>
+
             </div>
         </div>
     </div>
