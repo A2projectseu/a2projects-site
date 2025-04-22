@@ -153,34 +153,63 @@ Ogni collaborazione nasce dall’ascolto e si costruisce su misura, con l’obie
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://formspree.io/f/xpwdzpnr" method="POST">
-    <div class="row">
-        <div class="col-md col-sm-12 form-group mb-3">
-            <input type="text" name="name" placeholder="Nome" class="form-control" required>
-        </div>
-        <div class="col-md col-sm-12 form-group mb-3">
-            <input type="email" name="email" placeholder="Email" class="form-control" required>
-        </div>
-        <div class="col-12 form-group mb-3">
-            <input type="tel" name="phone" placeholder="Telefono" class="form-control">
-        </div>
-        <div class="col-12 form-group mb-3">
-            <textarea name="message" placeholder="Messaggio" class="form-control" required></textarea>
-        </div>
-        <!-- Campo anti-bot invisibile -->
-        <input type="text" name="_gotcha" style="display:none">
-        
-        <!-- Risposta dopo invio -->
-        <div class="col-12" id="form-response" style="display:none;">
-            <div class="alert alert-success">Grazie per il tuo messaggio! Ti risponderò presto.</div>
-        </div>
-
-        <div class="col-lg-12 col-md-12 col-sm-12 align-center">
-            <button type="submit" class="btn btn-primary display-7">Invia modulo</button>
-        </div>
-    </div>
-</form>
-
+                <form id="contact-form">
+    			<div class="row">
+        			<div class="col-md col-sm-12 form-group mb-3">
+            				<input type="text" name="name" placeholder="Nome" class="form-control" required>
+       				 </div>
+        			<div class="col-md col-sm-12 form-group mb-3">
+            				<input type="email" name="email" placeholder="Email" class="form-control" required>
+        			</div>
+        			<div class="col-12 form-group mb-3">
+            				<input type="tel" name="phone" placeholder="Telefono" class="form-control">
+        			</div>
+        			<div class="col-12 form-group mb-3">
+            				<textarea name="message" placeholder="Messaggio" class="form-control" required></textarea>
+        			</div>
+        				<input type="text" name="_gotcha" style="display:none">
+        			<div class="col-12" id="form-response" style="display:none;">
+            				<div class="alert alert-success" id="form-message"></div>
+        			</div>
+        			<div class="col-lg-12 col-md-12 col-sm-12 align-center">
+            				<button type="submit" class="btn btn-primary display-7">Invia modulo</button>
+        			</div>
+    			</div>
+		</form>
+	<script>
+		document.getElementById('contact-form').addEventListener('submit', async function (e) {
+   		e.preventDefault();
+   		const form = e.target;
+    		const formData = new FormData(form);
+    		try {
+        		const response = await fetch('https://formspree.io/f/xpwdzpnr', {
+            		method: 'POST',
+            		headers: {
+                		'Accept': 'application/json'
+            		},
+            		body: formData
+        	});
+        	const result = await response.json();
+        	const messageBox = document.getElementById('form-message');
+        	const responseContainer = document.getElementById('form-response');
+        	responseContainer.style.display = 'block';
+        	if (response.ok) {
+            		messageBox.className = 'alert alert-success';
+            		messageBox.textContent = "Grazie! Il tuo messaggio è stato inviato.";
+            		form.reset();
+        	} else {
+            		messageBox.className = 'alert alert-danger';
+            		messageBox.textContent = result.error || "Si è verificato un errore. Riprova.";
+        	}
+    		} catch (error) {
+        		const messageBox = document.getElementById('form-message');
+        		const responseContainer = document.getElementById('form-response');
+        		responseContainer.style.display = 'block';
+        		messageBox.className = 'alert alert-danger';
+        		messageBox.textContent = "Errore di rete. Riprova più tardi.";
+    			}
+		});
+	</script>
             </div>
         </div>
     </div>
